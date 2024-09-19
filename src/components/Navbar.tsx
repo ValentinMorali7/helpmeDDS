@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FaHome, FaUser } from "react-icons/fa";
+import { FaHome, FaUser, FaSquare } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -12,15 +12,21 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <Link href="/home" className={styles.navLink}>
+          <Link href="/pages/home" className={styles.navLink}>
             <FaHome className={styles.icon} />
             <span>Home</span>
           </Link>
         </li>
         <li className={styles.navItem}>
-          <Link href="/profile" className={styles.navLink}>
+          <Link href="/pages/profile" className={styles.navLink}>
             <FaUser className={styles.icon} />
             <span>Profile</span>
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link href="/pages/publications" className={styles.navLink}>
+            <FaSquare className={styles.icon} />
+            <span>Publicaciones</span>
           </Link>
         </li>
       </ul>

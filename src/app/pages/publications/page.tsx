@@ -1,61 +1,89 @@
 "use client";
-// import { useRouter } from "next/router";
+import React, { useState } from "react";
+import styles from "./Publications.module.css";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/modal";
+import { Button, ButtonGroup } from "@nextui-org/button";
 
-interface Publicacion {
-  id_publicacion: number;
-  titulo: string;
-  fecha_publicacion: string;
-}
+const PublicationsPage = () => {
+  const [showForm, setShowForm] = useState(false);
 
-const listaPublicaciones: Publicacion[] = [
-  {
-    id_publicacion: 1,
-    titulo: "Ayuda a los niños de la comunidad",
-    fecha_publicacion: "2024-09-15",
-  },
-  {
-    id_publicacion: 2,
-    titulo: "Recaudación para alimentos",
-    fecha_publicacion: "2024-09-10",
-  },
-  {
-    id_publicacion: 3,
-    titulo: "Donaciones para material escolar",
-    fecha_publicacion: "2024-08-20",
-  },
-];
-
-const Publications = () => {
-  //   const router = useRouter();
+  const handleCreatePublication = () => {
+    setShowForm(true);
+  };
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  console.log("isOpen", isOpen);
 
   return (
-    <div className="container">
-      <div className="formContainer">
-        <h2 className="title">Publicaciones Disponibles</h2>
-        <div className="publicationsList">
-          {listaPublicaciones.map((publicacion) => (
-            <div key={publicacion.id_publicacion} className="card">
-              <img src="/assets/icon/corg.png" alt="Corgi" className="image" />
-              <div className="card-content">
-                <h3 className="card-title">{publicacion.titulo}</h3>
-                <p className="card-subtitle">
-                  Fecha de creación: {publicacion.fecha_publicacion}
-                </p>
-                <button
-                  className="submitButton"
-                  //   onClick={() =>
-                  //     router.push(`/publicacion/${publicacion.id_publicacion}`)
-                  //   }
-                >
-                  Ver más...
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className={styles.container}>
+      <div className={styles.formContainer}>
+        <h1 className={styles.title}>Iniciar sesión</h1>
+        <>
+          {/* <Button onPress={onOpen}>Open Modal</Button>{" "} */}
+          <button type="submit" className={styles.submitButton}>
+            Iniciar sesión
+          </button>
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">
+                    Modal Title
+                  </ModalHeader>
+                  <ModalBody>
+                    <p>
+                      Magna exercitation reprehenderit magna aute tempor
+                      cupidatat consequat elit dolor adipisicing. Mollit dolor
+                      eiusmod sunt ex incididunt cillum quis. Velit duis sit
+                      officia eiusmod Lorem aliqua enim laboris do dolor
+                      eiusmod. Et mollit incididunt nisi consectetur esse
+                      laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
+                      deserunt nostrud ad veniam.
+                    </p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                    <Button color="primary" onPress={onClose}>
+                      Action
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+        </>
       </div>
     </div>
+
+    // <div className={styles.container}>
+    //   {!showForm ? (
+    //     <button className={styles.button} onClick={handleCreatePublication}>
+    //       Crear nueva publicación
+    //     </button>
+    //   ) : (
+    //     <form className={styles.form}>
+    //       <input type="text" placeholder="Título" className={styles.input} />
+    //       <textarea placeholder="Descripción" className={styles.input} />
+    //       <input
+    //         type="number"
+    //         placeholder="Meta monetaria"
+    //         className={styles.input}
+    //       />
+    //       <button type="submit" className={styles.button}>
+    //         Crear
+    //       </button>
+    //     </form>
+    //   )}
+    // </div>
   );
 };
 
-export default Publications;
+export default PublicationsPage;
